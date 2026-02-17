@@ -1,0 +1,4 @@
+{
+  "pylint.args": ["--django-settings-module=devsearch.settings"],
+  "[python]": {}
+}
