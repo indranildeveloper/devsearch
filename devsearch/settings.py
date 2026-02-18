@@ -49,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "devsearch.urls"
@@ -117,3 +118,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Connect proper url to the media
+MEDIA_URL = "/images/"
+
+# Upload the static files
+STATICFILES_DIRS = [BASE_DIR / "static"]
+# Change the media root so that user uploaded files are stored in the location
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
