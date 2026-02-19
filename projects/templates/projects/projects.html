@@ -1,32 +1,50 @@
 {% extends "main.html" %}
 {% block content %}
-    <h1>Projects</h1>
-    <table>
-        <tr>
-            <th>Project</th>
-            <th>Votes</th>
-            <th>Ratio</th>
-            <th>Created At</th>
-            <th>Edit Project</th>
-            <th>Delete Project</th>
-            <th>View Project</th>
-        </tr>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.title }}</td>
-                <td>{{ project.vote_total }}</td>
-                <td>{{ project.vote_ratio }}%</td>
-                <td>{{ project.created_at }}</td>
-                <td>
-                    <a href="{% url 'update-project' project.id %}">Edit</a>
-                </td>
-                <td>
-                    <a href="{% url 'delete-project' project.id %}">Delete</a>
-                </td>
-                <td>
-                    <a href="{% url 'project' project.id %}">view</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <main class="container">
+        <section class="my-5">
+            <h2 class="text-center">Search Projects</h2>
+            <form action="">
+                <div class="d-flex flex-column">
+                    <label for="search-project" class="form-label">Search Project</label>
+                    <div class="d-flex gap-2">
+                        <input id="search-project"
+                               type="text"
+                               class="form-control"
+                               placeholder="Search by Project Title"
+                               aria-describedby="search-project">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <div class="row gy-3">
+            {% for project in projects %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="{{ project.featured_image.url }}"
+                             height="auto"
+                             width="auto"
+                             class="card-img-top"
+                             alt="{{ project.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url "project" project.id %}">{{ project.title }}</a>
+                            </h5>
+                            <h6>
+                                By <a href="#">Indranil Halder</a>
+                            </h6>
+                            {% comment %} TODO: truncate description to unify all card sizes {% endcomment %}
+                            <p class="card-text">{{ project.description }}</p>
+                            <p>
+                                {{ project.vote_ratio }}% Positive Feedback ({{ project.vote_total }} vote{{ project.vote_total|pluralize:"s" }})
+                            </p>
+                            <div class="d-flex gap-1">
+                                {% for tag in project.tags.all %}<span class="badge rounded-pill text-bg-primary">{{ tag }}</span>{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
 {% endblock content %}

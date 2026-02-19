@@ -1,7 +1,39 @@
 {% load static %}
-<img src="{% static "images/logo.svg" %}"
-     height="auto"
-     width="auto"
-     alt="logo">
-<a href="{% url 'create-project' %}">Add Project</a>
-<hr>
+{% comment %} Navbar {% endcomment %}
+<nav class="navbar bg-dark navbar-expand-lg border-bottom border-body"
+     data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'projects' %}">DevSearch</a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Developers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inbox</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Account</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="btn btn-primary" href="{% url 'create-project' %}">Add Project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="#">Login/Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
