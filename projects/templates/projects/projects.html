@@ -31,7 +31,7 @@
                                 <a href="{% url "project" project.id %}">{{ project.title }}</a>
                             </h5>
                             <h6>
-                                By <a href="#">Indranil Halder</a>
+                                By <a href="#">{{ project.owner.name }}</a>
                             </h6>
                             {% comment %} TODO: truncate description to unify all card sizes {% endcomment %}
                             <p class="card-text">{{ project.description }}</p>
