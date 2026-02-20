@@ -1,13 +1,52 @@
 {% extends "main.html" %}
 {% block content %}
-    <img src="{{ project.featured_image.url }}"
-         height="auto"
-         width="500"
-         alt="{{ project.title }}">
-    <h1>{{ project.title }}</h1>
-    <hr>
-    {% for tag in project.tags.all %}<span>{{ tag }}</span>{% endfor %}
-    <hr>
-    <br>
-    <p>{{ project.description }}</p>
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <h3>Tools and Stack</h3>
+                <div class="d-flex flex-wrap column-gap-2">
+                    {% for tag in project.tags.all %}<p class="bg-secondary text-white px-4 py-2 rounded-3">{{ tag }}</p>{% endfor %}
+                </div>
+                <p>
+                    {% if project.source_link %}
+                        <a href="{{ project.source_link }}" target="_blank">Source Code<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    {% endif %}
+                </p>
+                <p>
+                    {% if project.demo_link %}
+                        <a href="{{ project.demo_link }}" target="_blank">Live Demo<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-12 col-md-8">
+                <img src="{{ project.featured_image.url }}"
+                     class="rounded-2 img img-fluid"
+                     height="auto"
+                     width="auto"
+                     alt="{{ project.title }}">
+                <div class="mt-4">
+                    <p class="text-primary">By Indranil Halder</p>
+                    <h1>{{ project.title }}</h1>
+                    <h5 class="text-uppercase">About the Project</h5>
+                    <p>{{ project.description }}</p>
+                    <hr>
+                    <h5 class="text-uppercase">Feedback</h5>
+                    <p>
+                        {{ project.vote_ratio }}% Positive Feedback ({{ project.vote_total }} Vote{{ project.vote_total|pluralize:"s" }})
+                    </p>
+                    <form action="">
+                        <div class="mb-3">
+                            <label for="feedback-textarea" class="form-label">Share Feedback</label>
+                            <textarea name="feedback-textarea"
+                                      id="feedback-textarea"
+                                      class="form-control"
+                                      rows="4"
+                                      placeholder="Write your comments here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock content %}
