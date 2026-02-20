@@ -1,9 +1,16 @@
 {% extends "main.html" %}
 {% block content %}
-    <h1>Project Form</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <main class="container my-5">
+        <h1>Project Form</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.label }}" class="form-label text-capitalize">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </main>
 {% endblock content %}
