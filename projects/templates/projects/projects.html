@@ -31,10 +31,9 @@
                                 <a href="{% url "project" project.id %}">{{ project.title }}</a>
                             </h5>
                             <h6>
-                                By <a href="#">{{ project.owner.name }}</a>
+                                By <a href="{% url "user-profile" project.owner.id %}">{{ project.owner.name }}</a>
                             </h6>
-                            {% comment %} TODO: truncate description to unify all card sizes {% endcomment %}
-                            <p class="card-text">{{ project.description }}</p>
+                            <p class="card-text">{{ project.description|truncatechars:"200" }}</p>
                             <p>
                                 {{ project.vote_ratio }}% Positive Feedback ({{ project.vote_total }} vote{{ project.vote_total|pluralize:"s" }})
                             </p>
