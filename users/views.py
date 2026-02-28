@@ -26,7 +26,7 @@ def user_profile(request, pk):
 
 
 def login_user(request):
-    page = "register"
+    page = "login"
     if request.user.is_authenticated:
         return redirect("profiles")
 
@@ -46,8 +46,8 @@ def login_user(request):
             return redirect("profiles")
         else:
             messages.error(request, "Username or Password is incorrect!")
-
-    return render(request, "users/login_register.html")
+    context = {"page": page}
+    return render(request, "users/login_register.html", context)
 
 
 def register_user(request):
